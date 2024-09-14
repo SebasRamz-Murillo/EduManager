@@ -1,7 +1,14 @@
+import { subjects } from "../../../lib/DataJson/Subjects";
+
 export default function GridStudents() {
   return (
-    <>
-      <section className="grid h-full w-full grid-cols-2 gap-3 bg-slate-500 p-4"></section>
-    </>
+    <article className="grid grid-cols-2 gap-3">
+      {subjects.map((subject) => (
+        <div className="h-full w-full bg-slate-300 p-4">
+          <h1>{subject.name}</h1>
+          <p>{subject.teacher}</p>{" "}
+        </div>
+      ))}
+    </article>
   );
 }
