@@ -11,6 +11,9 @@ export default function Sidebar() {
           <li>
             <Link to="about">About</Link>
           </li>
+          <li>
+            <Link to="estudiante">Estudiante</Link>
+          </li>
         </ul>
       </nav>
     </aside>
