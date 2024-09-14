@@ -11,7 +11,7 @@ export default function Panel() {
       {/* Header en la parte superior derecha */}
       <Header />
       {/* Contenido debajo del header */}
-      <main className="col-start-2 row-start-2 w-full bg-primary-30 p-4 sm:col-start-1 lg:col-start-2">
+      <main className="col-start-2 row-start-2 w-full bg-gray-20 sm:col-start-1 lg:col-start-2">
         <Outlet /> {/* Aquí se mostrarán las rutas hijas */}
       </main>
     </section>

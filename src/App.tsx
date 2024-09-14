@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Panel from "./components/sections/panel/Panel";
-import Home from "./components/sections/test/Home";
+import Home from "./components/sections/panel/Home";
 import About from "./components/sections/test/About";
 
 function App() {

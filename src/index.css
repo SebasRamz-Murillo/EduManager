@@ -1,3 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Tema por defecto */
+/* Tema por defecto */
+:root {
+  /* Colores gray */
+  --color-gray-0: #ffffff;
+  --color-gray-10: #fafafa;
+  --color-gray-20: #f5f4f4;
+  --color-gray-30: #ebebeb;
+  --color-gray-40: #c7c7c7;
+  --color-gray-50: #aeaeae;
+  --color-gray-60: #888888;
+  --color-gray-70: #626262;
+  --color-gray-80: #545454;
+  --color-gray-90: #3d3d3d;
+  --color-gray-100: #171717;
+
+  /* Colores success */
+  --color-success-10: #e6f4ea;
+  --color-success-20: #bcead5;
+  --color-success-50: #34d399;
+  --color-success-70: #059669;
+
+  /* Colores warning */
+  --color-warning-10: #fff4e5;
+  --color-warning-20: #ffe6bf;
+  --color-warning-50: #f59e0b;
+  --color-warning-70: #d97706;
+
+  /* Colores error */
+  --color-error-10: #fdeaea;
+  --color-error-20: #f8b6b6;
+  --color-error-50: #ef4444;
+  --color-error-70: #b91c1c;
+
+  /* Colores info */
+  --color-info-10: #e6f0fb;
+  --color-info-20: #bfdaf7;
+  --color-info-50: #3b82f6;
+  --color-info-70: #1d4ed8;
+}
+
+/* Tema oscuro */
+[data-theme="dark"] {
+  --color-gray-0: #171717;
+  --color-gray-10: #3d3d3d;
+  --color-gray-20: #545454;
+  --color-gray-30: #626262;
+  --color-gray-40: #888888;
+  --color-gray-50: #aeaeae;
+  --color-gray-60: #c7c7c7;
+  --color-gray-70: #ebebeb;
+  --color-gray-80: #f5f4f4;
+  --color-gray-90: #fafafa;
+  --color-gray-100: #ffffff;
+
+  /* Cambios opcionales para el tema oscuro en success, warning, error, info */
+}
