@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ValidatePassword from "./ValidatePassword";
 import { CircularProgress, TextField } from "@mui/material";
 import { emailValid, textRequired } from "../../lib/validators";
 import LabelErrorTerminal from "./LabelErrorTerminal";
 import AlertMui from "./AlertMui";
+import { useNavigate } from "react-router-dom";
 
 export default function RightSideLogin(props: any) {
   const [form, setForm] = useState({
@@ -16,23 +17,23 @@ export default function RightSideLogin(props: any) {
     email: "",
     password: "",
   });
-  const [passwordValid, setpasswordValid] = useState(true);
+  const navigate = useNavigate();
+  const [passwordValid, setPasswordValid] = useState(false);
   const [loading, setLoading] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [response, setResponse] = useState({
     message: "",
     status: "",
   });
 
-  const [rulesValidation, setRulesValidation] = useState([
-    {
-      wordUpper: false,
-      number: false,
-      specialCharacter: false,
-      length: false,
-    },
-  ]);
+  const [rulesValidation, setRulesValidation] = useState({
+    wordUpper: false,
+    number: false,
+    specialCharacter: false,
+    length: false,
+  });
+
   const validators: { [key: string]: Array<(value: string) => string | void> } =
     {
       email: [emailValid],
@@ -45,16 +46,37 @@ export default function RightSideLogin(props: any) {
       ],
     };
 
+  // Verifica si el formulario es válido para habilitar el botón
+  useEffect(() => {
+    const emailIsValid = formError.email === "" && form.email !== "";
+    const allRulesMet =
+      rulesValidation.wordUpper &&
+      rulesValidation.number &&
+      rulesValidation.specialCharacter &&
+      rulesValidation.length;
+    console.log("rulesValidation", rulesValidation);
+    if (
+      rulesValidation.length &&
+      rulesValidation.number &&
+      rulesValidation.specialCharacter &&
+      rulesValidation.wordUpper
+    ) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [formError.email, rulesValidation]);
+
   const handleOnChange = (e: any) => {
     const { name, value } = e.target;
     // Actualiza el estado del formulario
     setForm((prevState: any) => ({ ...prevState, [name]: value }));
+
     // Si hay validadores para este campo, ejecútalos todos
     if (validators[name]) {
       const errorMessages = validators[name]
         .map((validator) => validator(value))
         .filter((errorMessage) => errorMessage !== ""); // Filtra solo los errores
-
       // Si hay errores, los añadimos al estado de errores, si no, limpiamos
       setFormError((prevErrors: any) => ({
         ...prevErrors,
@@ -63,33 +85,37 @@ export default function RightSideLogin(props: any) {
     }
   };
 
-  const handleLogin = async () => {};
+  const handleLogin = async () => {
+    navigate("/panel/home");
+    // Aquí manejarías la lógica del login
+  };
 
   const validatePassword = (value: string) => {
     const hasUpperCase = /[A-Z]/.test(value);
     const hasNumber = /[0-9]/.test(value);
     const hasSpecialCharacter = /[^a-zA-Z0-9]/.test(value);
     const hasLength = /.{8,}/.test(value);
-    setRulesValidation([
-      {
-        wordUpper: hasUpperCase,
-        number: hasNumber,
-        specialCharacter: hasSpecialCharacter,
-        length: hasLength,
-      },
-    ]);
+
+    setRulesValidation({
+      wordUpper: hasUpperCase,
+      number: hasNumber,
+      specialCharacter: hasSpecialCharacter,
+      length: hasLength,
+    });
+
     if (hasNumber && hasUpperCase && hasSpecialCharacter && hasLength) {
-      setpasswordValid(false);
+      setPasswordValid(true);
     } else {
-      setpasswordValid(true);
+      setPasswordValid(false);
     }
   };
+
   return (
     <>
       <section
         className={`flex items-center justify-center text-gray-70 sm:p-[16px]`}
       >
-        <div className="flex h-[502px] flex-col items-start sm:w-full md:w-[500px] lg:w-[360px]">
+        <div className="flex h-[502px] flex-col items-start rounded-lg px-10 shadow-shadows-md sm:w-full md:w-[500px] lg:w-[360px]">
           <h2 className={`text-[30px] font-bold text-primary-40`}>
             Iniciar Sesión
           </h2>
@@ -97,7 +123,7 @@ export default function RightSideLogin(props: any) {
           <form action="" className="w-full pt-[20px]">
             <div className="mt-6 h-[70px]">
               <TextField
-                error={false}
+                error={!!formError.email}
                 name="email"
                 size="small"
                 type="email"
@@ -123,10 +149,16 @@ export default function RightSideLogin(props: any) {
             <ValidatePassword
               password={form.password}
               passwordValid={passwordValid}
-              rulesPassword={rulesValidation}
+              rulesPassword={[rulesValidation]}
             />
             <div className="pt-[24px]">
-              <button className="h-[44px] w-full rounded-[24px] bg-purple-500 text-white">
+              <button
+                className={`h-[44px] w-full rounded-[24px] bg-purple-500 text-white ${
+                  buttonDisabled ? "opacity-60" : "opacity-100"
+                }`}
+                disabled={buttonDisabled}
+                onClick={handleLogin}
+              >
                 {loading ? (
                   <CircularProgress size={24} color="secondary" />
                 ) : (

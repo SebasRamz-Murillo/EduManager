@@ -1,27 +1,23 @@
+// Archivo: WebSocketService.ts
 class WebSocketService {
   private socket: WebSocket | null = null;
   private messageLog: ((message: string) => void) | null = null;
 
   constructor(url: string) {
-    try {
-      this.socket = new WebSocket(url);
-      this.setupSocketHandlers();
-    } catch (error) {
-      console.error("WebSocket connection failed:", error);
-    }
+    this.socket = new WebSocket(url);
+    this.setupSocketHandlers();
   }
 
+  // Configurar los eventos del WebSocket
   private setupSocketHandlers() {
     if (!this.socket) return;
 
     this.socket.onopen = (event) => {
-      console.log("WebSocket connection opened", event);
       this.logMessage("[open] Connection established");
     };
 
     this.socket.onmessage = (event) => {
-      console.log("WebSocket message received", event);
-      this.logMessage(`Received: ${event.data}`);
+      this.handleMessage(event.data);
     };
 
     this.socket.onclose = (event) => {
@@ -35,36 +31,41 @@ class WebSocketService {
     };
 
     this.socket.onerror = (error) => {
-      console.error("WebSocket error", error);
       this.logMessage(`[error] ${error}`);
     };
   }
 
+  // Manejar el mensaje recibido y aplicarle formateo
+  private handleMessage(data: string) {
+    data = data.trim(); // Limpiar espacios innecesarios
+    this.logMessage(data + " "); // Agregar un espacio entre los fragmentos
+  }
+
+  // Método para enviar mensajes
   public sendMessage(message: string) {
     if (this.socket) {
       this.socket.send(
         JSON.stringify({
           type: "message",
-          content: [{ role: "user", content: message }],
+          content: [{ role: "user", content: message.trim() }],
         }),
       );
-      this.logMessage(`Sent: ${message}`);
-    } else {
-      console.error("WebSocket is not connected");
+      this.logMessage(`Sent: ${message.trim()}`);
     }
   }
 
+  // Método para loguear mensajes
   private logMessage(message: string) {
     if (this.messageLog) {
       this.messageLog(message);
-    } else {
-      console.log("Log:", message);
     }
   }
 
+  // Método para registrar un callback para manejar los logs de mensajes
   public registerLogHandler(callback: (message: string) => void) {
     this.messageLog = callback;
   }
 }
 
+// Exportar una instancia del WebSocketService
 export const websocketService = new WebSocketService("ws://localhost:8000/ws");
