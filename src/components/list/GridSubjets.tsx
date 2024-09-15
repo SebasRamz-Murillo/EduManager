@@ -25,10 +25,6 @@ export default function GridSubjets() {
     }
   }, [materia, grupo]);
 
-  const handleSelectSubject = (subject: any) => {
-    console.log(subject);
-  };
-
   return (
     <>
       <article className="grid h-full max-h-[70vh] gap-3 overflow-y-auto rounded-xl sm:grid-cols-1 lg:grid-cols-2">

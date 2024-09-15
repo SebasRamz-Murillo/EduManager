@@ -11,11 +11,9 @@ interface Message {
 }
 
 export default function MessagesChat() {
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const messageLogRef = useRef<HTMLDivElement | null>(null); // Para manejar el contenedor de mensajes
   const [messages, setMessages] = useState<Message[]>([]); // Estado para los mensajes
   const [newMessage, setNewMessage] = useState("");
-  const [currentMessage, setCurrentMessage] = useState<string>(""); // Para manejar el mensaje actual
 
   // Función para desplazarse automáticamente hacia el último mensaje
   const scrollToBottom = () => {

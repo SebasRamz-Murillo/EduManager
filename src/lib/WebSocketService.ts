@@ -12,7 +12,7 @@ class WebSocketService {
   private setupSocketHandlers() {
     if (!this.socket) return;
 
-    this.socket.onopen = (event) => {
+    this.socket.onopen = () => {
       this.logMessage("[open] Connection established");
     };
 

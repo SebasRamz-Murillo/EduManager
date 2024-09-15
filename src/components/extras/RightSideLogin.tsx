@@ -1,5 +1,4 @@
-"use client";
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 import ValidatePassword from "./ValidatePassword";
 import { CircularProgress, TextField } from "@mui/material";
@@ -8,7 +7,7 @@ import LabelErrorTerminal from "./LabelErrorTerminal";
 import AlertMui from "./AlertMui";
 import { useNavigate } from "react-router-dom";
 
-export default function RightSideLogin(props: any) {
+export default function RightSideLogin() {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -19,10 +18,10 @@ export default function RightSideLogin(props: any) {
   });
   const navigate = useNavigate();
   const [passwordValid, setPasswordValid] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [response, setResponse] = useState({
+  const [response] = useState({
     message: "",
     status: "",
   });
@@ -48,13 +47,6 @@ export default function RightSideLogin(props: any) {
 
   // Verifica si el formulario es válido para habilitar el botón
   useEffect(() => {
-    const emailIsValid = formError.email === "" && form.email !== "";
-    const allRulesMet =
-      rulesValidation.wordUpper &&
-      rulesValidation.number &&
-      rulesValidation.specialCharacter &&
-      rulesValidation.length;
-    console.log("rulesValidation", rulesValidation);
     if (
       rulesValidation.length &&
       rulesValidation.number &&
@@ -116,7 +108,7 @@ export default function RightSideLogin(props: any) {
         className={`flex items-center justify-center text-gray-70 sm:p-[16px]`}
       >
         <div className="flex h-[502px] flex-col items-start rounded-lg px-10 shadow-shadows-md sm:w-full md:w-[500px] lg:w-[360px]">
-          <h2 className={`text-[30px] font-bold text-primary-40`}>
+          <h2 className={`text-primary-40 text-[30px] font-bold`}>
             Iniciar Sesión
           </h2>
           <p>Nos encanta que estemos trabajando juntos 😁</p>

@@ -24,9 +24,14 @@ function App() {
         <Route path="/panel/estudiante" element={<EstudianteInfo />} />
         <Route path="/panel/horario" element={<ClassSchedule />} />
         <Route path="/panel/materias" element={<SubjectCards />} />
-        <Route path="/panel/materias/asistencia/dia" element={<DailyAttendance />} />
-        <Route path="/panel/materias/asistencia" element={<AttendanceHistory />} />
-
+        <Route
+          path="/panel/materias/asistencia/dia"
+          element={<DailyAttendance />}
+        />
+        <Route
+          path="/panel/materias/asistencia"
+          element={<AttendanceHistory />}
+        />
       </Route>
     </Routes>
   );
