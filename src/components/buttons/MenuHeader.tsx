@@ -1,5 +1,4 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
@@ -16,15 +15,13 @@ export default function MenuHeader() {
 
   const handleLinkMyProfile = () => {
     console.log("Link to my profile");
-  }
+  };
 
-  const handleLinkSupport = () => {
-    
-  }
+  const handleLinkSupport = () => {};
 
   const handleLogout = () => {
     console.log("Logout");
-  }
+  };
 
   return (
     <div>

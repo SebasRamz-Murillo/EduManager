@@ -50,7 +50,7 @@ class WebSocketService {
           content: [{ role: "user", content: message.trim() }],
         }),
       );
-      this.logMessage(`Sent: ${message.trim()}`);
+      this.logMessage(`${message.trim()}`);
     }
   }
 
