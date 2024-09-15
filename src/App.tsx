@@ -8,6 +8,8 @@ import Home2 from "./components/sections/panel/Home2";
 import Login from "./components/sections/auth/Login";
 import Register from "./components/sections/auth/Register";
 import SubjectCards from "./components/sections/subjects/info_card";
+import DailyAttendance from "./components/sections/asistencia/pase_lista";
+import AttendanceHistory from "./components/sections/asistencia/lista_asistencia";
 
 function App() {
   return (
@@ -23,8 +25,9 @@ function App() {
         <Route path="/panel/estudiante" element={<EstudianteInfo />} />
         <Route path="/panel/horario" element={<ClassSchedule />} />
         <Route path="/panel/materias" element={<SubjectCards />} />
+        <Route path="/panel/materias/asistencia/dia" element={<DailyAttendance />} />
+        <Route path="/panel/materias/asistencia" element={<AttendanceHistory />} />
 
-        
       </Route>
     </Routes>
   );
