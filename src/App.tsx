@@ -4,10 +4,14 @@ import Home from "./components/sections/panel/Home";
 import About from "./components/sections/test/About";
 import EstudianteInfo from "./components/sections/estudiante/EstudianteInfo";
 import Home2 from "./components/sections/panel/Home2";
+import Login from "./components/sections/auth/Login";
+import Register from "./components/sections/auth/Register";
 
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Login />} />
+      {/* <Route path="/register" element={<Register />} /> */}
       <Route path="/panel" element={<Panel />}>
         {/* Rutas hijas */}
         <Route path="/panel/home" element={<Home />} />
