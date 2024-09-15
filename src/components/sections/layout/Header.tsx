@@ -1,6 +1,5 @@
 import React from "react";
 import MenuHeader from "../../buttons/MenuHeader";
-import SearchInput from "../../inputs/SearchInput";
 
 interface HeaderProps {
   isMobile: boolean;
