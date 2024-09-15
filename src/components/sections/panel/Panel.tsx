@@ -1,19 +1,29 @@
+import React, { useState, useEffect } from 'react';
+import { Outlet } from "react-router-dom";
 import Header from "../layout/Header";
 import Sidebar from "../layout/Sidebar";
-import { Outlet } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 export default function Panel() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <section className="grid h-screen w-full grid-cols-[100px_1fr] grid-rows-[56px_1fr] sm:grid-cols-[1fr] lg:grid-cols-[100px_1fr]">
-      {/* Sidebar en la izquierda, ocupa todo el alto, visible solo en lg */}
-      <Sidebar />
-      {/* Header en la parte superior derecha */}
+    <div className="h-screen w-full flex flex-col">
       <Header />
-      {/* Contenido debajo del header */}
-      <main className="col-start-2 row-start-2 w-full bg-gray-20 sm:col-start-1 lg:col-start-2">
-        <Outlet /> {/* Aquí se mostrarán las rutas hijas */}
-      </main>
-    </section>
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar />
+        <main className={`flex-1 overflow-auto bg-gray-100 p-4 ${isMobile ? '' : 'ml-64'}`}>
+          <Outlet />
+        </main>
+      </div>
+    </div>
   );
 }
