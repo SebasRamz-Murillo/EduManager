@@ -1,22 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { LayoutDashboard, Calendar, BookOpen, Building2, ChevronDown, Check, Menu, X } from 'lucide-react';
 
-export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [salonesOpen, setSalonesOpen] = useState(false);
-  const [salones, setSalones] = useState(['1A', '2B', '2C', '4E']); // Ejemplo de salones
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
-  const location = useLocation();
+interface SidebarProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isMobile: boolean;
+}
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen, isMobile }) => {
+  const [salonesOpen, setSalonesOpen] = useState(false);
+  const [salones] = useState(['1A', '2B', '2C', '4E']); // Ejemplo de salones
+  const location = useLocation();
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -93,7 +88,7 @@ export default function Sidebar() {
           onClick={toggleSidebar}
           className="fixed top-4 left-4 z-50 p-2 bg-gray-900 text-white rounded-md"
         >
-          <Menu size={24} />
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       )}
       <aside className={`fixed left-0 top-0 h-full bg-gray-900 text-white transition-all duration-300 ease-in-out ${
@@ -104,3 +99,5 @@ export default function Sidebar() {
     </>
   );
 }
+
+export default Sidebar;
