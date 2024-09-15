@@ -212,11 +212,10 @@ const SubjectCards: React.FC = () => {
     const USER = JSON.parse(localStorage.getItem("user") || "{}");
 
     if (USER) {
-      console.log("si hay datos en el localstorage", USER);
-      setSubjects(USER.subjects); 
+      setSubjects(USER.subjects); // Asignar datos del localStorage
     } else {
-      console.log("no hay datos en el localstorage");
-      setSubjects(simulatedSubjectsData); 
+      // Si no hay datos en el localStorage, usa datos simulados
+      setSubjects(simulatedSubjectsData); // Asignar datos simulados
     }
     setLoading(false); 
   }, []);
