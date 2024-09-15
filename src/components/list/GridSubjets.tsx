@@ -1,4 +1,4 @@
-import { subjects } from "../../../lib/DataJson/Subjects";
+import { subjects } from "../../lib/DataJson/Subjects";
 
 export default function GridSubjets() {
   return (
