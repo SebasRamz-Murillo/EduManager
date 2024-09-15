@@ -14,6 +14,18 @@ export default function MenuHeader() {
     setAnchorEl(null);
   };
 
+  const handleLinkMyProfile = () => {
+    console.log("Link to my profile");
+  }
+
+  const handleLinkSupport = () => {
+    
+  }
+
+  const handleLogout = () => {
+    console.log("Logout");
+  }
+
   return (
     <div>
       <button
@@ -35,9 +47,9 @@ export default function MenuHeader() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleLinkMyProfile}>Mi perfil</MenuItem>
+        <MenuItem onClick={handleLinkSupport}>Soporte</MenuItem>
+        <MenuItem onClick={handleLogout}>Cerrar sesion</MenuItem>
       </Menu>
     </div>
   );
