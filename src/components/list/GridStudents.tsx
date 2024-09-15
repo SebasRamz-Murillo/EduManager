@@ -1,6 +1,6 @@
 import { subjects } from "../../lib/DataJson/Subjects";
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 export default function GridStudents() {
   const [searchParams] = useSearchParams();

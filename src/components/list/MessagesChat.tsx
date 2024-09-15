@@ -55,7 +55,7 @@ export default function MessagesChat() {
   useEffect(() => {
     websocketService.registerLogHandler((fragment: string) => {
       if (fragment === "[DONE]") {
-        // Si llega [DONE], creamos un nuevo div de mensaje
+        // Si llega [DONE], no lo
         addNewMessage("", 2, "Servidor");
       } else {
         if (
@@ -78,7 +78,7 @@ export default function MessagesChat() {
     websocketService.sendMessage(newMessage);
 
     // Agregar mensaje del usuario
-    addNewMessage(`Sent: ${newMessage}`, 1, "Usuario");
+    addNewMessage(`${newMessage}`, 1, "Usuario");
     setNewMessage(""); // Limpiar el input después de enviar
   };
 
@@ -87,15 +87,8 @@ export default function MessagesChat() {
   }, [messages]);
 
   return (
-    <div
-      style={{
-        fontFamily: "Arial, sans-serif",
-        maxWidth: "800px",
-        margin: "0 auto",
-        padding: "20px",
-      }}
-    >
-      <h1>WebSocket Chat</h1>
+    <div className="flex h-full flex-col items-start justify-between p-4">
+      <h1 className="text-[30px] font-bold">Edu GPT</h1>
       {/* Contenedor de mensajes */}
       <div
         id="messageLog"
@@ -103,7 +96,6 @@ export default function MessagesChat() {
         style={{
           height: "300px",
           overflowY: "scroll",
-          border: "1px solid #ccc",
           padding: "10px",
           marginBottom: "20px",
         }}
@@ -111,14 +103,30 @@ export default function MessagesChat() {
         {messages.map((message, index) => (
           <div key={`${message.id}-${index}`}>
             {message.user_id === 1 ? (
-              <div style={{ textAlign: "right", marginBottom: "10px" }}>
-                <strong>{message.user}:</strong>{" "}
-                <ReactMarkdown>{message.message}</ReactMarkdown>
+              <div
+                style={{ textAlign: "right", marginBottom: "10px" }}
+                className="flex flex-row items-start justify-end gap-2"
+              >
+                <div
+                  className="inline-block max-w-[80%] rounded-lg bg-purple-500 p-4"
+                  style={{ wordBreak: "break-word" }}
+                >
+                  <ReactMarkdown>{message.message}</ReactMarkdown>
+                </div>
+                <div className="h-10 w-10 rounded-full bg-black"></div>
               </div>
             ) : (
-              <div style={{ textAlign: "left", marginBottom: "10px" }}>
-                <strong>{message.user}:</strong>{" "}
-                <ReactMarkdown>{message.message}</ReactMarkdown>
+              <div
+                style={{ textAlign: "left", marginBottom: "10px" }}
+                className="flex flex-row items-start justify-start gap-2"
+              >
+                <div className="h-10 w-10 rounded-full bg-black"></div>
+                <div
+                  className="inline-block max-w-[80%] rounded-lg bg-purple-400 p-4"
+                  style={{ wordBreak: "break-word" }}
+                >
+                  <ReactMarkdown>{message.message}</ReactMarkdown>
+                </div>
               </div>
             )}
           </div>
@@ -126,22 +134,20 @@ export default function MessagesChat() {
       </div>
 
       {/* Input de mensaje */}
-      <TextField
-        id="messageInput"
-        variant="outlined"
-        fullWidth
-        label="Type a message..."
-        value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
-        style={{ marginRight: "10px" }}
-      />
-      <button
-        id="sendButton"
-        onClick={handleSendMessage}
-        style={{ padding: "5px 10px", marginTop: "10px" }}
-      >
-        Send
-      </button>
+      <section className="flex w-full flex-row items-center justify-center">
+        <TextField
+          id="messageInput"
+          variant="outlined"
+          fullWidth
+          label="Type a message..."
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          style={{ marginRight: "10px" }}
+        />
+        <button id="sendButton" onClick={handleSendMessage}>
+          Send
+        </button>
+      </section>
     </div>
   );
 }
