@@ -84,7 +84,7 @@ export default function RightSideLogin() {
       form.email === ProfesorsArray1[0].email
     ) {
       setTimeout(() => {
-        localStorage.setItem("user", JSON.stringify(ProfesorsArray1[0]));
+        // localStorage.setItem("user", JSON.stringify(ProfesorsArray1[0]));
         navigate("/panel/home");
       }, 1000);
       return;

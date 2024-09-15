@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -19,8 +19,22 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen, isMobile }) => {
   const [salonesOpen, setSalonesOpen] = useState(false);
-  const [salones] = useState(["1A", "2B", "2C", "4E"]); // Ejemplo de salones
   const location = useLocation();
+  const [groups, setGroups] = useState<any[]>([]); // Para almacenar todos los grupos de cada materia
+
+  useEffect(() => {
+    const USER = JSON.parse(localStorage.getItem("user") || "{}");
+
+    if (USER && USER.subjects) {
+      // console.log("Si hay datos en el localstorage", USER);
+
+      // Extraer todos los grupos (units) de cada materia (subject)
+      const allGroups = USER.subjects.flatMap((subject: any) => subject.groups);
+
+      setGroups(allGroups); // Guardar los grupos en el estado
+    } else {
+    }
+  }, []);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -85,13 +99,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen, isMobile }) => {
           </button>
           {salonesOpen && (
             <div className="mt-2 rounded-lg bg-gray-800 shadow-lg">
-              {salones.map((salon, index) => (
+              {groups.map((salon, index) => (
                 <button
                   key={index}
                   className="flex w-full items-center p-2 transition-colors hover:bg-gray-700"
                 >
                   <Check size={16} className="mr-2" />
-                  <span>{salon}</span>
+                  <span>
+                    {salon.number}
+                    {salon.letter}
+                  </span>
                 </button>
               ))}
             </div>

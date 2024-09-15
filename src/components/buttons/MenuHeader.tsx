@@ -2,8 +2,10 @@ import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
+import { useNavigate } from "react-router-dom";
 
 export default function MenuHeader() {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -13,14 +15,11 @@ export default function MenuHeader() {
     setAnchorEl(null);
   };
 
-  const handleLinkMyProfile = () => {
-    console.log("Link to my profile");
-  };
-
-  const handleLinkSupport = () => {};
-
   const handleLogout = () => {
-    console.log("Logout");
+    localStorage.removeItem("user");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
   };
 
   return (
@@ -44,8 +43,6 @@ export default function MenuHeader() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleLinkMyProfile}>Mi perfil</MenuItem>
-        <MenuItem onClick={handleLinkSupport}>Soporte</MenuItem>
         <MenuItem onClick={handleLogout}>Cerrar sesion</MenuItem>
       </Menu>
     </div>
