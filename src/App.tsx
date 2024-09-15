@@ -6,7 +6,6 @@ import EstudianteInfo from "./components/sections/estudiante/EstudianteInfo";
 import ClassSchedule from "./components/sections/horario/horario";
 import Home2 from "./components/sections/panel/Home2";
 import Login from "./components/sections/auth/Login";
-import Register from "./components/sections/auth/Register";
 import SubjectCards from "./components/sections/subjects/info_card";
 import DailyAttendance from "./components/sections/asistencia/pase_lista";
 import AttendanceHistory from "./components/sections/asistencia/lista_asistencia";

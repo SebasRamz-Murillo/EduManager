@@ -6,7 +6,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   Typography,
   Button,
   Card,
@@ -35,8 +34,30 @@ const StyledButton = styled(Button)({
   margin: '10px',
 });
 
+interface CurrentClass {
+  subject: string;
+  room: string;
+  day: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+}
+
+interface Student {
+  id: number;
+  name: string;
+}
+
+interface AttendanceRecord {
+  [studentId: number]: boolean;
+}
+
+interface JustificationRecord {
+  [studentId: number]: string;
+}
+
 // Datos de ejemplo para la clase actual
-const currentClass = {
+const currentClass: CurrentClass = {
   subject: 'Matemáticas',
   room: '1B',
   day: 'Lunes',
@@ -46,7 +67,7 @@ const currentClass = {
 };
 
 // Lista de estudiantes de ejemplo
-const students = [
+const students: Student[] = [
   { id: 1, name: 'Ana García' },
   { id: 2, name: 'Carlos Rodríguez' },
   { id: 3, name: 'Elena Martínez' },
@@ -54,18 +75,18 @@ const students = [
   { id: 5, name: 'Sofía Hernández' },
 ];
 
-const DailyAttendance = () => {
-  const [attendance, setAttendance] = useState(
+const DailyAttendance: React.FC = () => {
+  const [attendance, setAttendance] = useState<AttendanceRecord>(
     students.reduce((acc, student) => ({ ...acc, [student.id]: true }), {})
   );
-  const [showJustification, setShowJustification] = useState(false);
-  const [justifications, setJustifications] = useState({});
+  const [showJustification, setShowJustification] = useState<boolean>(false);
+  const [justifications, setJustifications] = useState<JustificationRecord>({});
 
-  const handleAttendanceChange = (studentId) => {
+  const handleAttendanceChange = (studentId: number) => {
     setAttendance((prev) => ({ ...prev, [studentId]: !prev[studentId] }));
   };
 
-  const handleJustificationChange = (studentId, justification) => {
+  const handleJustificationChange = (studentId: number, justification: string) => {
     setJustifications((prev) => ({ ...prev, [studentId]: justification }));
   };
 
@@ -102,7 +123,7 @@ const DailyAttendance = () => {
           label="Mostrar campo de justificación"
         />
 
-        <StyledTableContainer component={Paper}>
+        <StyledTableContainer >
           <Table>
             <TableHead>
               <TableRow>

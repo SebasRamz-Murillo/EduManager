@@ -1,4 +1,3 @@
-import ChangeTheme from "../../../lib/ChangeTheme";
 import MenuHeader from "../../buttons/MenuHeader";
 import SearchInput from "../../inputs/SearchInput";
 

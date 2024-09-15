@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import {
   Table,
@@ -24,33 +25,51 @@ import {
   ListItem,
   ListItemText,
   Avatar,
+  SelectChangeEvent,
 } from '@mui/material';
-import { styled } from '@mui/system';
+
+// Definición de tipos
+interface Student {
+  id: number;
+  name: string;
+  present: boolean;
+}
+
+interface AttendanceRecord {
+  date: string;
+  presentCount: number;
+  absentCount: number;
+  totalStudents: number;
+  students: Student[];
+}
 
 // Datos de ejemplo (mantenidos del ejemplo anterior)
-const subjects = ['Matemáticas', 'Historia', 'Física', 'Literatura'];
-const groups = ['A', 'B', 'C'];
+const subjects: string[] = ['Matemáticas', 'Historia', 'Física', 'Literatura'];
+const groups: string[] = ['A', 'B', 'C'];
 
-const generateAttendanceData = () => {
+const generateAttendanceData = (): AttendanceRecord[] => {
   // ... (mantén la función de generación de datos igual)
+  // Asegúrate de que esta función devuelva un array de AttendanceRecord
+  return [];
 };
 
-const attendanceData = generateAttendanceData();
+const attendanceData: AttendanceRecord[] = generateAttendanceData();
 
-const AttendanceHistory = () => {
-  const [subject, setSubject] = useState('');
-  const [group, setGroup] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [filteredData, setFilteredData] = useState(attendanceData);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+const AttendanceHistory: React.FC = () => {
+  const [subject, setSubject] = useState<string>('');
+  const [group, setGroup] = useState<string>('');
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
+  const [filteredData, setFilteredData] = useState<AttendanceRecord[]>(attendanceData);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [selectedDate, setSelectedDate] = useState<AttendanceRecord | null>(null);
 
   const handleSearch = () => {
     // ... (mantén la lógica de búsqueda igual)
+    // Asegúrate de que esta función actualice filteredData con un array de AttendanceRecord
   };
 
-  const handleRowClick = (date) => {
+  const handleRowClick = (date: AttendanceRecord) => {
     setSelectedDate(date);
     setOpenDialog(true);
   };
@@ -70,7 +89,7 @@ const AttendanceHistory = () => {
           <InputLabel>Materia</InputLabel>
           <Select
             value={subject}
-            onChange={(e) => setSubject(e.target.value)}
+            onChange={(e: SelectChangeEvent) => setSubject(e.target.value)}
             label="Materia"
           >
             {subjects.map((sub) => (
@@ -83,7 +102,7 @@ const AttendanceHistory = () => {
           <InputLabel>Grupo</InputLabel>
           <Select
             value={group}
-            onChange={(e) => setGroup(e.target.value)}
+            onChange={(e: SelectChangeEvent) => setGroup(e.target.value)}
             label="Grupo"
           >
             {groups.map((g) => (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { LayoutDashboard, Calendar, BookOpen, Building2, ChevronDown, Check, Menu, X } from 'lucide-react';
