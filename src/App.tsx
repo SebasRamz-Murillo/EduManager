@@ -6,6 +6,7 @@ import EstudianteInfo from "./components/sections/estudiante/EstudianteInfo";
 import Home2 from "./components/sections/panel/Home2";
 import Login from "./components/sections/auth/Login";
 import Register from "./components/sections/auth/Register";
+import ClassSchedule from "./components/sections/horario/horario";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         {/**como paso dos query params de materia y grupo a panel/home/{querys}, dame un ejemplo de como seria la url*/}
         <Route path="/panel/about" element={<About />} />
         <Route path="/panel/estudiante" element={<EstudianteInfo />} />
+        <Route path="/panel/horario" element={<ClassSchedule />} />
       </Route>
     </Routes>
   );
