@@ -1,11 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { TextField } from "@mui/material";
 import { Messages as initialMessages } from "../../lib/DataJson/Messages";
+import { websocketService } from "../../lib/WebSocketService";
 
 export default function MessagesChat() {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const messagesContainerRef = useRef<HTMLDivElement | null>(null); // Referencia al contenedor de mensajes
-  const [messages, setMessages] = useState(initialMessages); //
+  interface Message {
+    id: number;
+    user_id: number;
+    message: string;
+    user: string;
+  }
+
+  const [messages, setMessages] = useState<Message[]>(initialMessages); // Estado para los mensajes
   const [newMessage, setNewMessage] = useState("");
 
   // Función para desplazar el contenedor de mensajes al último mensaje
@@ -21,15 +29,35 @@ export default function MessagesChat() {
     scrollToBottom();
   }, [messages]);
 
-  // Simulación de agregar un nuevo mensaje
+  // Registrar el callback para loguear los mensajes recibidos del WebSocket
+  useEffect(() => {
+    websocketService.registerLogHandler((message: string) => {
+      const newMessageObj = {
+        id: messages.length + 1,
+        user_id: 2, // Asume que este es un mensaje recibido del servidor
+        message: message,
+        user: "Servidor",
+      };
+      setMessages((prevMessages) => [...prevMessages, newMessageObj]);
+    });
+  }, [messages]);
+
   const handleSendMessage = () => {
-    const Message = {
-      id: messages.length + 1,
-      user_id: 1,
-      message: newMessage,
-      user: "Usuario Actual",
-    };
-    setMessages([...messages, Message]);
+    if (newMessage.trim() === "") return;
+
+    try {
+      websocketService.sendMessage(newMessage); // Enviar el mensaje a través del WebSocket
+      // const Message = {
+      //   id: messages.length + 1,
+      //   user_id: 1, // Simula que es el usuario actual
+      //   message: newMessage,
+      //   user: "Usuario Actual",
+      // };
+      // setMessages([...messages, Message]);
+      setNewMessage(""); // Limpiar el input después de enviar
+    } catch (error) {
+      console.error("Error al enviar el mensaje:", error);
+    }
   };
 
   return (
@@ -39,9 +67,9 @@ export default function MessagesChat() {
         ref={messagesContainerRef}
         className="h-[400px] w-full overflow-y-auto p-4"
       >
-        {messages.map((message) => (
+        {messages.map((message, index) => (
           <div
-            key={message.id}
+            key={`${message.id}-${index}`} // Usamos una combinación de id y el índice como clave
             className={`flex w-full flex-row items-center justify-${
               message.user_id === 1 ? "end" : "start"
             } p-4`}
@@ -78,7 +106,6 @@ export default function MessagesChat() {
             </article>
           </div>
         ))}
-        {/* Este div vacío es el punto de referencia para el scroll al último mensaje */}
         <div ref={messagesEndRef} />
       </section>
 
