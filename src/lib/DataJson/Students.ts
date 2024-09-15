@@ -1,9 +1,24 @@
 export const Students1 = [
   {
     id: 1,
-    name: "John Doe",
+    name: "Abelardo",
     lastname: "Doe",
-    status: "bad",
+    status: 4,
+    details: {
+      age: 20,
+      email: "example@gmail.com",
+      phone: "1234567890",
+      address: "1234 Main St",
+      city: "City",
+      state: "State",
+      zip: "12345",
+    },
+  },
+  {
+    id: 1,
+    name: "Angel",
+    lastname: "Doe",
+    status: 4,
     details: {
       age: 20,
       email: "example@gmail.com",
@@ -16,9 +31,9 @@ export const Students1 = [
   },
   {
     id: 2,
-    name: "John Doe",
+    name: "Luis",
     lastname: "Doe",
-    status: "good",
+    status: 8,
     details: {
       age: 20,
       email: "example@gmail.com",
@@ -31,9 +46,9 @@ export const Students1 = [
   },
   {
     id: 3,
-    name: "John Doe",
+    name: "Ricardo",
     lastname: "Doe",
-    status: "medium",
+    status: 6,
     details: {
       age: 20,
       email: "example@gmail.com",
@@ -51,7 +66,7 @@ export const Students2 = [
     id: 1,
     name: "John Doe",
     lastname: "Doe",
-    status: "bad",
+    status: 2,
     details: {
       age: 20,
       email: "example@gmail.com",
@@ -66,7 +81,7 @@ export const Students2 = [
     id: 2,
     name: "John Doe",
     lastname: "Doe",
-    status: "good",
+    status: 9,
     details: {
       age: 20,
       email: "example@gmail.com",

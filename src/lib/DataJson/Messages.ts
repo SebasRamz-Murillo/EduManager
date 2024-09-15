@@ -23,4 +23,10 @@ export const Messages = [
     user: "Jane Doe",
     user_id: 2,
   },
+  {
+    id: 5,
+    message: "Can I help you?",
+    user: "Johan",
+    user_id: 1,
+  },
 ];
