@@ -30,7 +30,7 @@ export default function Sidebar() {
           <LayoutDashboard size={20} />
           <span>Dashboard</span>
         </Link>
-        <Link to="/horario" className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-800 transition-colors">
+        <Link to="/panel/horario" className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-800 transition-colors">
           <Calendar size={20} />
           <span>Horario</span>
         </Link>
