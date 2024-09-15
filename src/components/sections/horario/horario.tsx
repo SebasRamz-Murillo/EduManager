@@ -6,7 +6,6 @@ import {
   TableContainer, 
   TableHead, 
   TableRow, 
-  Paper, 
   Switch, 
   Typography, 
   Button,
@@ -20,7 +19,8 @@ import {
   MenuItem,
   Checkbox,
   ListItemText,
-  OutlinedInput
+  OutlinedInput,
+  SelectChangeEvent
 } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -45,8 +45,15 @@ const StyledButton = styled(Button)({
   margin: '10px',
 });
 
-const ClassCell = styled(TableCell)(({ theme, duration, isoverlap }) => ({
-  backgroundColor: isoverlap === 'true' ? theme.palette.error.light : theme.palette.primary.light,
+interface ClassCellProps {
+  duration?: number;
+  isOverlap: boolean;
+}
+
+const ClassCell = styled(TableCell, {
+  shouldForwardProp: (prop) => prop !== 'duration' && prop !== 'isOverlap',
+})<ClassCellProps>(({ theme, duration, isOverlap }) => ({
+  backgroundColor: isOverlap ? theme.palette.error.light : theme.palette.primary.light,
   color: theme.palette.primary.contrastText,
   height: duration ? `${duration * 15}px` : 'auto',
   padding: '4px',
@@ -62,59 +69,67 @@ const ClassCell = styled(TableCell)(({ theme, duration, isoverlap }) => ({
   },
 }));
 
-const subjects = [
+interface Subject {
+  day: string;
+  startTime: string;
+  endTime: string;
+  name: string;
+  room: string;
+}
+
+const subjects: Subject[] = [
     { day: 'Lunes', startTime: '07:00', endTime: '08:30', name: 'Matemáticas', room: '1B' },
-    { day: 'Lunes', startTime: '07:00', endTime: '08:30', name: 'Inglés', room: '2A' },  // Choque con Matemáticas
+    { day: 'Lunes', startTime: '07:00', endTime: '08:30', name: 'Inglés', room: '2A' },
     { day: 'Martes', startTime: '09:00', endTime: '10:30', name: 'Historia', room: '2A' },
     { day: 'Miércoles', startTime: '08:00', endTime: '09:40', name: 'Física', room: '3C' },
     { day: 'Jueves', startTime: '07:30', endTime: '09:00', name: 'Literatura', room: '4D' },
     { day: 'Viernes', startTime: '08:30', endTime: '10:00', name: 'Química', room: '5E' },
-    { day: 'Sábado', startTime: '10:30', endTime: '11:00', name: 'Inglés', room: '6F' },  // Inglés se repite
+    { day: 'Sábado', startTime: '10:30', endTime: '11:00', name: 'Inglés', room: '6F' },
     { day: 'Domingo', startTime: '10:30', endTime: '12:00', name: 'Arte', room: '7G' },
-    { day: 'Lunes', startTime: '10:00', endTime: '11:30', name: 'Matemáticas', room: '1B' }, // Matemáticas se repite
-    { day: 'Martes', startTime: '11:00', endTime: '12:30', name: 'Historia', room: '2A' }, // Historia se repite
+    { day: 'Lunes', startTime: '10:00', endTime: '11:30', name: 'Matemáticas', room: '1B' },
+    { day: 'Martes', startTime: '11:00', endTime: '12:30', name: 'Historia', room: '2A' },
     { day: 'Miércoles', startTime: '11:00', endTime: '12:30', name: 'Geografía', room: '3C' },
-    { day: 'Jueves', startTime: '09:00', endTime: '10:30', name: 'Física', room: '4D' },  // Física se repite
+    { day: 'Jueves', startTime: '09:00', endTime: '10:30', name: 'Física', room: '4D' },
     { day: 'Viernes', startTime: '13:00', endTime: '14:30', name: 'Educación Física', room: '5E' },
-    { day: 'Sábado', startTime: '10:30', endTime: '12:00', name: 'Biología', room: '6F' },  // Choque con Inglés el mismo día
-    { day: 'Domingo', startTime: '13:00', endTime: '14:30', name: 'Arte', room: '7G' }  // Arte se repite
-        ];
+    { day: 'Sábado', startTime: '10:30', endTime: '12:00', name: 'Biología', room: '6F' },
+    { day: 'Domingo', startTime: '13:00', endTime: '14:30', name: 'Arte', room: '7G' }
+];
 
 const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
-const ClassSchedule = () => {
-  const [showNormalWeek, setShowNormalWeek] = useState(true);
-  const [selectedDays, setSelectedDays] = useState([]);
-  const [selectedRooms, setSelectedRooms] = useState([]);
-  const [selectedSubjects, setSelectedSubjects] = useState([]);
+const ClassSchedule: React.FC = () => {
+  const [showNormalWeek, setShowNormalWeek] = useState<boolean>(true);
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+  const [selectedRooms, setSelectedRooms] = useState<string[]>([]);
+  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const isMobile = useMediaQuery(defaultTheme.breakpoints.down('sm'));
 
   const handleToggleChange = () => {
     setShowNormalWeek(!showNormalWeek);
   };
 
-  const handleDayChange = (event) => {
+  const handleDayChange = (event: SelectChangeEvent<typeof selectedDays>) => {
     const {
       target: { value },
     } = event;
     setSelectedDays(typeof value === 'string' ? value.split(',') : value);
   };
 
-  const handleRoomChange = (event) => {
+  const handleRoomChange = (event: SelectChangeEvent<typeof selectedRooms>) => {
     const {
       target: { value },
     } = event;
     setSelectedRooms(typeof value === 'string' ? value.split(',') : value);
   };
 
-  const handleSubjectChange = (event) => {
+  const handleSubjectChange = (event: SelectChangeEvent<typeof selectedSubjects>) => {
     const {
       target: { value },
     } = event;
     setSelectedSubjects(typeof value === 'string' ? value.split(',') : value);
   };
 
-  const getWeekDays = () => {
+  const getWeekDays = (): string[] => {
     if (showNormalWeek) {
       return daysOfWeek;
     } else {
@@ -123,18 +138,18 @@ const ClassSchedule = () => {
     }
   };
 
-  const parseTime = (time) => {
+  const parseTime = (time: string): number => {
     const [hours, minutes] = time.split(':').map(Number);
     return hours * 60 + minutes;
   };
 
-  const formatTime = (minutes) => {
+  const formatTime = (minutes: number): string => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
     return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
   };
 
-  const getFilteredSubjects = () => {
+  const getFilteredSubjects = (): Subject[] => {
     return subjects.filter(subject => 
       (selectedDays.length === 0 || selectedDays.includes(subject.day)) &&
       (selectedRooms.length === 0 || selectedRooms.includes(subject.room)) &&
@@ -142,7 +157,7 @@ const ClassSchedule = () => {
     );
   };
 
-  const getEarliestStartTime = () => {
+  const getEarliestStartTime = (): number => {
     const filteredSubjects = getFilteredSubjects();
     return filteredSubjects.reduce((earliest, subject) => {
       const startTime = parseTime(subject.startTime);
@@ -150,7 +165,7 @@ const ClassSchedule = () => {
     }, 24 * 60);
   };
 
-  const getLatestEndTime = () => {
+  const getLatestEndTime = (): number => {
     const filteredSubjects = getFilteredSubjects();
     return filteredSubjects.reduce((latest, subject) => {
       const endTime = parseTime(subject.endTime);
@@ -158,20 +173,20 @@ const ClassSchedule = () => {
     }, 0);
   };
 
-  const [earliestStartTime, setEarliestStartTime] = useState(getEarliestStartTime());
-  const [latestEndTime, setLatestEndTime] = useState(getLatestEndTime());
+  const [earliestStartTime, setEarliestStartTime] = useState<number>(getEarliestStartTime());
+  const [latestEndTime, setLatestEndTime] = useState<number>(getLatestEndTime());
 
   useEffect(() => {
     setEarliestStartTime(getEarliestStartTime());
     setLatestEndTime(getLatestEndTime());
   }, [selectedDays, selectedRooms, selectedSubjects]);
 
-  const timeSlots = Array.from(
-    { length: (latestEndTime - earliestStartTime) / 15 + 1 },
+  const timeSlots: string[] = Array.from(
+    { length: Math.ceil((latestEndTime - earliestStartTime) / 15) + 1 },
     (_, i) => formatTime(earliestStartTime + i * 15)
   );
 
-  const getClassesForTimeSlot = (day, time) => {
+  const getClassesForTimeSlot = (day: string, time: string): Subject[] => {
     return getFilteredSubjects().filter(subject =>
       subject.day === day &&
       parseTime(subject.startTime) <= parseTime(time) &&
@@ -179,21 +194,20 @@ const ClassSchedule = () => {
     );
   };
 
-  const getDuration = (startTime, endTime) => {
+  const getDuration = (startTime: string, endTime: string): number => {
     return Math.ceil((parseTime(endTime) - parseTime(startTime)) / 15);
   };
 
-  const handleClassClick = (subject) => {
+  const handleClassClick = (subject: Subject) => {
     console.log('Clase seleccionada:', subject);
   };
 
-  const handleSuperpositionClick = (subjects) => {
+  const handleSuperpositionClick = (subjects: Subject[]) => {
     console.log('Superposición de clases:', subjects);
   };
 
-
-  const uniqueRooms = [...new Set(subjects.map(subject => subject.room))];
-  const uniqueSubjects = [...new Set(subjects.map(subject => subject.name))];
+  const uniqueRooms: string[] = [...new Set(subjects.map(subject => subject.room))];
+  const uniqueSubjects: string[] = [...new Set(subjects.map(subject => subject.name))];
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -267,7 +281,7 @@ const ClassSchedule = () => {
           </div>
         </div>
 
-        <StyledTableContainer component={Paper}>
+        <StyledTableContainer>
           <Table stickyHeader size={isMobile ? "small" : "medium"}>
             <TableHead>
               <TableRow>
@@ -293,7 +307,7 @@ const ClassSchedule = () => {
                                     key={dayIndex}
                                     rowSpan={duration}
                                     duration={duration}
-                                    isoverlap={(classes.length > 1).toString()}
+                                    isOverlap={classes.length > 1}
                                     onClick={() => handleClassClick(classToShow)}
                                 >
                                     {`${classToShow.name} - ${classToShow.room}`}
@@ -310,7 +324,7 @@ const ClassSchedule = () => {
                         <ClassCell
                           key={dayIndex}
                           duration={1}
-                          isoverlap={(classes.length > 1).toString()}
+                          isOverlap={classes.length > 1}
                           onClick={() => handleSuperpositionClick(classes)}
                         >
                           {`⚠️ ${classes.length} clases superpuestas`}
@@ -318,10 +332,9 @@ const ClassSchedule = () => {
                             <div key={index}> 
                                 {`${classToShow.name} - ${classToShow.room}`}
                                 <br />
-                                {`${classToShow.startTime} - ${classToShow.endTime}`}
-                            </div>
+                                {`${classToShow.startTime} - ${classToShow.endTime}`}                            </div>
                             ))}
-                            
+
                         </ClassCell>
                       );
                         }

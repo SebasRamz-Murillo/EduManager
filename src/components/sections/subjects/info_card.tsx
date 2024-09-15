@@ -14,8 +14,28 @@ const StyledCard = styled(Card)(({ theme }) => ({
   overflowX: 'auto',
 }));
 
+// Define interfaces for our data structures
+interface Theme {
+  title: string;
+  description: string;
+}
+
+interface Unit {
+  unitNumber: number;
+  name: string;
+  description: string;
+  themes: Theme[];
+}
+
+interface Subject {
+  id: string;
+  name: string;
+  description: string;
+  units: Unit[];
+}
+
 // Simulated data (replace this with your actual data or API call)
-const simulatedSubjectsData = [
+const simulatedSubjectsData: Subject[] = [
   {
     "id": "sub_001",
     "name": "Mathematics",
@@ -92,7 +112,13 @@ const simulatedSubjectsData = [
   }
 ];
 
-const SubjectCard = ({ subject, onExpand, expanded }) => {
+interface SubjectCardProps {
+  subject: Subject;
+  onExpand: (id: string) => void;
+  expanded: boolean;
+}
+
+const SubjectCard: React.FC<SubjectCardProps> = ({ subject, onExpand, expanded }) => {
   const Icon = subject.name === "Mathematics" ? CalculateIcon : BookIcon;
 
   return (
@@ -119,7 +145,11 @@ const SubjectCard = ({ subject, onExpand, expanded }) => {
   );
 };
 
-const UnitsList = ({ units }) => (
+interface UnitsListProps {
+  units: Unit[];
+}
+
+const UnitsList: React.FC<UnitsListProps> = ({ units }) => (
   <List>
     {units.map((unit) => (
       <React.Fragment key={unit.unitNumber}>
@@ -146,10 +176,10 @@ const UnitsList = ({ units }) => (
   </List>
 );
 
-const SubjectCards = () => {
-  const [subjects, setSubjects] = useState([]);
-  const [expandedSubject, setExpandedSubject] = useState(null);
-  const [loading, setLoading] = useState(true);
+const SubjectCards: React.FC = () => {
+  const [subjects, setSubjects] = useState<Subject[]>([]);
+  const [expandedSubject, setExpandedSubject] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     // Simulating an API call
@@ -170,7 +200,7 @@ const SubjectCards = () => {
     fetchSubjects();
   }, []);
 
-  const handleExpand = (subjectId) => {
+  const handleExpand = (subjectId: string) => {
     setExpandedSubject(expandedSubject === subjectId ? null : subjectId);
   };
 
