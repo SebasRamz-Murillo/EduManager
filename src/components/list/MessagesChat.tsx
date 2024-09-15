@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { TextField } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import { websocketService } from "../../lib/WebSocketService";
+import SendIcon from "@mui/icons-material/Send";
 
 interface Message {
   id: number;
@@ -84,15 +85,19 @@ export default function MessagesChat() {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    websocketService.connect();
+  }, []);
   return (
-    <div className="flex h-full flex-col items-start justify-between p-4">
-      <h1 className="text-[30px] font-bold">Edu GPT</h1>
+    <div className="flex h-full w-full flex-col items-start justify-between p-4">
+      <h1 className="text-[30px] font-bold">EduManager</h1>
       {/* Contenedor de mensajes */}
       <div
         id="messageLog"
         ref={messageLogRef}
         style={{
-          height: "300px",
+          height: "580px",
+          width: "100%",
           overflowY: "scroll",
           padding: "10px",
           marginBottom: "20px",
@@ -137,13 +142,13 @@ export default function MessagesChat() {
           id="messageInput"
           variant="outlined"
           fullWidth
-          label="Type a message..."
+          label="Haz una pregunta"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           style={{ marginRight: "10px" }}
         />
         <button id="sendButton" onClick={handleSendMessage}>
-          Send
+          <SendIcon />
         </button>
       </section>
     </div>

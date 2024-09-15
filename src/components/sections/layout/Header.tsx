@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import MenuHeader from "../../buttons/MenuHeader";
 import SearchInput from "../../inputs/SearchInput";
 
@@ -10,7 +10,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ isMobile, toggleSidebar }) => {
   return (
     <header className="col-start-2 h-[60px] w-full bg-gray-20 p-4 text-white sm:col-start-1 lg:col-start-2">
-      <section className="flex h-full w-full flex-row items-center justify-between sm:px-0 lg:px-5">
+      <section className="flex h-full w-full flex-row items-center justify-end sm:px-0 lg:px-5">
         <div className="sm:hidden lg:block">
           {isMobile && (
             <button onClick={toggleSidebar}>
@@ -19,9 +19,9 @@ const Header: React.FC<HeaderProps> = ({ isMobile, toggleSidebar }) => {
             </button>
           )}
         </div>
-        <div>
+        {/* <div>
           <SearchInput />
-        </div>
+        </div> */}
         <div>
           <MenuHeader />
           {/* <ChangeTheme /> */}
@@ -29,6 +29,6 @@ const Header: React.FC<HeaderProps> = ({ isMobile, toggleSidebar }) => {
       </section>
     </header>
   );
-}
+};
 
 export default Header;

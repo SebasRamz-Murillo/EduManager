@@ -1,17 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardActions, Typography, Button, 
-    ThemeProvider, createTheme, styled, Collapse, List, ListItem, 
-    ListItemText, Divider, CircularProgress } from '@mui/material';
-import { ExpandMore as ExpandMoreIcon, ExpandLess as ExpandLessIcon,
-    Calculate as CalculateIcon, Book as BookIcon } from '@mui/icons-material';
+import React, { useState, useEffect } from "react";
+import { subjectsArray1 } from "../../../lib/DataJson/Subjects";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  Button,
+  ThemeProvider,
+  createTheme,
+  styled,
+  Collapse,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  CircularProgress,
+} from "@mui/material";
+import {
+  ExpandMore as ExpandMoreIcon,
+  ExpandLess as ExpandLessIcon,
+  Calculate as CalculateIcon,
+  Book as BookIcon,
+} from "@mui/icons-material";
 
 const defaultTheme = createTheme();
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  margin: '20px auto',
+  margin: "20px auto",
   padding: theme.spacing(2),
-  maxWidth: '100%',
-  overflowX: 'auto',
+  maxWidth: "100%",
+  overflowX: "auto",
 }));
 
 // Define interfaces for our data structures
@@ -37,79 +55,93 @@ interface Subject {
 // Simulated data (replace this with your actual data or API call)
 const simulatedSubjectsData: Subject[] = [
   {
-    "id": "sub_001",
-    "name": "Mathematics",
-    "description": "A subject that covers topics in algebra, calculus, and geometry.",
-    "units": [
+    id: "sub_001",
+    name: "Mathematics",
+    description:
+      "A subject that covers topics in algebra, calculus, and geometry.",
+    units: [
       {
-        "unitNumber": 1,
-        "name": "Algebra",
-        "description": "This unit covers basic algebraic concepts, including variables, equations, and functions.",
-        "themes": [
+        unitNumber: 1,
+        name: "Algebra",
+        description:
+          "This unit covers basic algebraic concepts, including variables, equations, and functions.",
+        themes: [
           {
-            "title": "Linear Equations",
-            "description": "Understanding and solving linear equations and inequalities."
+            title: "Linear Equations",
+            description:
+              "Understanding and solving linear equations and inequalities.",
           },
           {
-            "title": "Quadratic Equations",
-            "description": "Study of quadratic equations, their properties, and solutions."
-          }
-        ]
+            title: "Quadratic Equations",
+            description:
+              "Study of quadratic equations, their properties, and solutions.",
+          },
+        ],
       },
       {
-        "unitNumber": 2,
-        "name": "Calculus",
-        "description": "This unit introduces the fundamental concepts of differential and integral calculus.",
-        "themes": [
+        unitNumber: 2,
+        name: "Calculus",
+        description:
+          "This unit introduces the fundamental concepts of differential and integral calculus.",
+        themes: [
           {
-            "title": "Limits and Continuity",
-            "description": "Basic introduction to limits, continuity, and their applications."
+            title: "Limits and Continuity",
+            description:
+              "Basic introduction to limits, continuity, and their applications.",
           },
           {
-            "title": "Derivatives",
-            "description": "Comprehensive study of derivatives and their applications in real-world problems."
-          }
-        ]
-      }
-    ]
+            title: "Derivatives",
+            description:
+              "Comprehensive study of derivatives and their applications in real-world problems.",
+          },
+        ],
+      },
+    ],
   },
   {
-    "id": "sub_002",
-    "name": "Physics",
-    "description": "A subject that explores the fundamental principles of the universe, including mechanics and electromagnetism.",
-    "units": [
+    id: "sub_002",
+    name: "Physics",
+    description:
+      "A subject that explores the fundamental principles of the universe, including mechanics and electromagnetism.",
+    units: [
       {
-        "unitNumber": 1,
-        "name": "Mechanics",
-        "description": "This unit focuses on the motion of objects and the forces that affect them.",
-        "themes": [
+        unitNumber: 1,
+        name: "Mechanics",
+        description:
+          "This unit focuses on the motion of objects and the forces that affect them.",
+        themes: [
           {
-            "title": "Newton's Laws of Motion",
-            "description": "Study of Newton's three laws of motion and their applications."
+            title: "Newton's Laws of Motion",
+            description:
+              "Study of Newton's three laws of motion and their applications.",
           },
           {
-            "title": "Work and Energy",
-            "description": "Understanding the relationship between work, energy, and power."
-          }
-        ]
+            title: "Work and Energy",
+            description:
+              "Understanding the relationship between work, energy, and power.",
+          },
+        ],
       },
       {
-        "unitNumber": 2,
-        "name": "Electromagnetism",
-        "description": "This unit covers electric and magnetic fields and their interactions.",
-        "themes": [
+        unitNumber: 2,
+        name: "Electromagnetism",
+        description:
+          "This unit covers electric and magnetic fields and their interactions.",
+        themes: [
           {
-            "title": "Electric Fields",
-            "description": "Introduction to electric fields, Coulomb's law, and electric potential."
+            title: "Electric Fields",
+            description:
+              "Introduction to electric fields, Coulomb's law, and electric potential.",
           },
           {
-            "title": "Magnetic Fields",
-            "description": "Exploration of magnetic fields and their effects on current-carrying conductors."
-          }
-        ]
-      }
-    ]
-  }
+            title: "Magnetic Fields",
+            description:
+              "Exploration of magnetic fields and their effects on current-carrying conductors.",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 interface SubjectCardProps {
@@ -118,13 +150,21 @@ interface SubjectCardProps {
   expanded: boolean;
 }
 
-const SubjectCard: React.FC<SubjectCardProps> = ({ subject, onExpand, expanded }) => {
+const SubjectCard: React.FC<SubjectCardProps> = ({
+  subject,
+  onExpand,
+  expanded,
+}) => {
   const Icon = subject.name === "Mathematics" ? CalculateIcon : BookIcon;
 
   return (
-    <Card sx={{ minWidth: 275, m: 1, flexGrow: 1, flexBasis: '30%' }}>
+    <Card sx={{ minWidth: 275, m: 1, flexGrow: 1, flexBasis: "30%" }}>
       <CardContent>
-        <Typography variant="h6" component="div" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+        >
           <Icon /> {subject.name}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -132,9 +172,9 @@ const SubjectCard: React.FC<SubjectCardProps> = ({ subject, onExpand, expanded }
         </Typography>
       </CardContent>
       <CardActions>
-        <Button 
-          size="small" 
-          fullWidth 
+        <Button
+          size="small"
+          fullWidth
           onClick={() => onExpand(subject.id)}
           endIcon={expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         >
@@ -151,23 +191,11 @@ interface UnitsListProps {
 
 const UnitsList: React.FC<UnitsListProps> = ({ units }) => (
   <List>
-    {units.map((unit) => (
-      <React.Fragment key={unit.unitNumber}>
+    {units.map((unit, index) => (
+      <React.Fragment key={index}>
         <ListItem alignItems="flex-start">
           <ListItemText
-            primary={`Unidad ${unit.unitNumber}: ${unit.name}`}
-            secondary={
-              <>
-                <Typography component="span" variant="body2" color="text.primary">
-                  {unit.description}
-                </Typography>
-                {unit.themes.map((theme, index) => (
-                  <Typography key={index} component="p" variant="body2">
-                    • {theme.title}: {theme.description}
-                  </Typography>
-                ))}
-              </>
-            }
+            primary={`Unidad ${index + 1}: ${unit}`} // Mostramos el nombre de la unidad y el índice como número de unidad
           />
         </ListItem>
         <Divider component="li" />
@@ -182,22 +210,17 @@ const SubjectCards: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // Simulating an API call
-    const fetchSubjects = async () => {
-      setLoading(true);
-      try {
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setSubjects(simulatedSubjectsData);
-      } catch (error) {
-        console.error("Error fetching subjects:", error);
-        // Handle error (e.g., show error message to user)
-      } finally {
-        setLoading(false);
-      }
-    };
+    const USER = JSON.parse(localStorage.getItem("user") || "{}");
 
-    fetchSubjects();
+    if (USER) {
+      console.log("si hay datos en el localstorage", USER);
+      setSubjects(USER.subjects); // Asignar datos del localStorage
+    } else {
+      console.log("no hay datos en el localstorage");
+      // Si no hay datos en el localStorage, usa datos simulados
+      setSubjects(simulatedSubjectsData); // Asignar datos simulados
+    }
+    setLoading(false); // Deja de mostrar el spinner
   }, []);
 
   const handleExpand = (subjectId: string) => {
@@ -206,7 +229,14 @@ const SubjectCards: React.FC = () => {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
         <CircularProgress />
       </div>
     );
@@ -218,15 +248,27 @@ const SubjectCards: React.FC = () => {
         <Typography variant="h4" gutterBottom>
           Materias
         </Typography>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginBottom: '20px' }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "20px",
+            marginBottom: "20px",
+          }}
+        >
           {subjects.map((subject) => (
             <React.Fragment key={subject.id}>
-              <SubjectCard 
-                subject={subject} 
+              <SubjectCard
+                subject={subject}
                 onExpand={handleExpand}
                 expanded={expandedSubject === subject.id}
               />
-              <Collapse in={expandedSubject === subject.id} timeout="auto" unmountOnExit style={{ width: '100%' }}>
+              <Collapse
+                in={expandedSubject === subject.id}
+                timeout="auto"
+                unmountOnExit
+                style={{ width: "100%" }}
+              >
                 <UnitsList units={subject.units} />
               </Collapse>
             </React.Fragment>

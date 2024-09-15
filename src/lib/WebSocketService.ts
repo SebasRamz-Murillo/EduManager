@@ -13,7 +13,7 @@ class WebSocketService {
     if (!this.socket) return;
 
     this.socket.onopen = () => {
-      this.logMessage("[open] Connection established");
+      // this.logMessage("[open] Connection established");
     };
 
     this.socket.onmessage = (event) => {
@@ -64,6 +64,13 @@ class WebSocketService {
   // Método para registrar un callback para manejar los logs de mensajes
   public registerLogHandler(callback: (message: string) => void) {
     this.messageLog = callback;
+  }
+
+  public connect() {
+    if (this.socket) {
+      this.socket = new WebSocket(this.socket.url);
+      this.setupSocketHandlers();
+    }
   }
 }
 
