@@ -1,4 +1,4 @@
-import { subjects } from "../../lib/DataJson/Subjects";
+import { subjectsArray1 } from "../../lib/DataJson/Subjects";
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
@@ -13,7 +13,7 @@ export default function GridSubjets() {
   useEffect(() => {
     if (materia && grupo) {
       console.log(materia, grupo);
-      setStudents(subjects);
+      setStudents(subjectsArray1);
       students.filter((subject) => {
         if (
           subject.id === parseInt(materia) &&
@@ -28,14 +28,14 @@ export default function GridSubjets() {
   return (
     <>
       <article className="grid h-full max-h-[70vh] gap-3 overflow-y-auto rounded-xl sm:grid-cols-1 lg:grid-cols-2">
-        {subjects.map((subject) => (
+        {subjectsArray1.map((subject) => (
           <Link
-            to={`/panel/home/alumnos?materia=${subject.id}&grupo=${subject.group_id}`} // Corregir la URL
+            to={`/panel/home/alumnos?materia=${subject.id}&grupo=${subject.id}`} // Corregir la URL
             key={subject.id}
             className="flex h-[150px] w-full flex-col items-start rounded-xl bg-slate-300 p-4 hover:bg-slate-400"
           >
             <h1 className="text-[20px] font-bold">{subject.name}</h1>
-            <p>{subject.teacher}</p>
+            <p>{subject.name}</p>
           </Link>
         ))}
       </article>

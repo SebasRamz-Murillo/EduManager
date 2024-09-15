@@ -1,4 +1,4 @@
-import { subjects } from "../../lib/DataJson/Subjects";
+import { subjectsArray1 } from "../../lib/DataJson/Subjects";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -14,12 +14,11 @@ export default function GridStudents() {
 
   useEffect(() => {
     if (materia && grupo) {
-      const subject = subjects.find(
-        (subj) =>
-          subj.id === parseInt(materia) && subj.group_id === parseInt(grupo),
+      const subject = subjectsArray1.find(
+        (subj) => subj.id === materia && subj.id === grupo,
       );
       if (subject) {
-        setStudents(subject.students);
+        setStudents(subjectsArray1);
       }
     }
   }, [materia, grupo]);
