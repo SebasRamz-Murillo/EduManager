@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -43,7 +43,6 @@ interface AttendanceRecord {
   students: Student[];
 }
 
-// Datos de ejemplo (mantenidos del ejemplo anterior)
 const subjects: string[] = ["Matemáticas", "Historia", "Física", "Literatura"];
 const groups: string[] = ["A", "B", "C"];
 
@@ -65,6 +64,18 @@ const AttendanceHistory: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<AttendanceRecord | null>(
     null,
   );
+  const [loading, setLoading] = useState<boolean>(true);
+
+
+  useEffect(() => {
+
+    const USER = JSON.parse(localStorage.getItem("user") || "{}");
+    if (USER) {
+        console.log("si hay datos en el localstorage", USER);
+      } 
+    setLoading(false); 
+
+  }, []);
 
   const handleSearch = () => {
     // ... (mantén la lógica de búsqueda igual)

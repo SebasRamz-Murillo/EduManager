@@ -213,13 +213,12 @@ const SubjectCards: React.FC = () => {
 
     if (USER) {
       console.log("si hay datos en el localstorage", USER);
-      setSubjects(USER.subjects); // Asignar datos del localStorage
+      setSubjects(USER.subjects); 
     } else {
       console.log("no hay datos en el localstorage");
-      // Si no hay datos en el localStorage, usa datos simulados
-      setSubjects(simulatedSubjectsData); // Asignar datos simulados
+      setSubjects(simulatedSubjectsData); 
     }
-    setLoading(false); // Deja de mostrar el spinner
+    setLoading(false); 
   }, []);
 
   const handleExpand = (subjectId: string) => {

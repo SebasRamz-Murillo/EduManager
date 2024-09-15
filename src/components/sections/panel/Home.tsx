@@ -1,5 +1,4 @@
 import GridSubjets from "../../list/GridSubjets";
-import MessagesChat from "../../list/MessagesChat";
 
 export default function Home() {
   return (

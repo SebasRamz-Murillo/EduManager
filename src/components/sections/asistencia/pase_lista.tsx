@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import {
   Table,
   TableBody,
@@ -16,6 +16,7 @@ import {
   TextField,
 } from '@mui/material';
 import { styled } from '@mui/system';
+import { set } from 'date-fns';
 
 const defaultTheme = createTheme();
 
@@ -43,10 +44,6 @@ interface CurrentClass {
   endTime: string;
 }
 
-interface Student {
-  id: number;
-  name: string;
-}
 
 interface AttendanceRecord {
   [studentId: number]: boolean;
@@ -66,16 +63,30 @@ const currentClass: CurrentClass = {
   endTime: '08:00',
 };
 
-// Lista de estudiantes de ejemplo
-const students: Student[] = [
-  { id: 1, name: 'Ana García' },
-  { id: 2, name: 'Carlos Rodríguez' },
-  { id: 3, name: 'Elena Martínez' },
-  { id: 4, name: 'David López' },
-  { id: 5, name: 'Sofía Hernández' },
-];
 
 const DailyAttendance: React.FC = () => {
+    const [loading, setLoading] = useState<boolean>(true);
+    const [subject, setSubject] = useState<any>([]);
+    const [students, setStudents] = useState<any[]>([]);
+
+    useEffect(() => {
+
+        const USER = JSON.parse(localStorage.getItem("user") || "{}");
+        if (USER) {
+            cleanData();
+            console.log("si hay datos en el localstorage", USER);
+            setSubject(USER.subjects[0]);
+            setStudents(USER.subjects[0].groups[0].students);
+            } 
+        setLoading(false); 
+
+        }, []);
+    
+    const cleanData = () => {
+        setSubject([]);
+        setStudents([]);
+    };
+    
   const [attendance, setAttendance] = useState<AttendanceRecord>(
     students.reduce((acc, student) => ({ ...acc, [student.id]: true }), {})
   );
@@ -136,7 +147,7 @@ const DailyAttendance: React.FC = () => {
               {students.map((student) => (
                 <TableRow key={student.id}>
                   <TableCell component="th" scope="row">
-                    {student.name}
+                    {student.first_name} {student.middle_name} {student.last_name}
                   </TableCell>
                   <TableCell align="center">
                     <Switch
