@@ -1,4 +1,5 @@
 import { subjectsArray1, subjectsArray2, subjectsArray3 } from "./Subjects";
+import { attendanceArray1 } from "./Attendance";
 const ProfesorsArray1 = [
   {
     id: "1",
@@ -12,6 +13,7 @@ const ProfesorsArray1 = [
     disabled: false,
     created_at: new Date(),
     subjects: subjectsArray2,
+    attendanceList: attendanceArray1,
     updated_at: null,
     deleted_at: null,
   },
@@ -27,6 +29,7 @@ const ProfesorsArray1 = [
     disabled: false,
     created_at: new Date(),
     subjects: subjectsArray2,
+    attendanceList: attendanceArray1,
     updated_at: null,
     deleted_at: null,
   },
@@ -44,6 +47,8 @@ const ProfesorsArray2 = [
     role: "p", // Role de profesor
     disabled: false,
     created_at: new Date(),
+    attendanceList: [],
+
     updated_at: null,
     deleted_at: null,
     subjects: subjectsArray3,
@@ -59,6 +64,8 @@ const ProfesorsArray2 = [
     role: "p", // Role de profesor
     disabled: false,
     created_at: new Date(),
+    attendanceList: [],
+
     updated_at: null,
     deleted_at: null,
     subjects: subjectsArray1,
@@ -77,6 +84,8 @@ const ProfesorsArray3 = [
     role: "p", // Role de profesor
     disabled: false,
     created_at: new Date(),
+    attendanceList: [],
+
     updated_at: null,
     deleted_at: null,
     subjects: subjectsArray2,

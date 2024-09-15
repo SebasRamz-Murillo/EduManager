@@ -26,14 +26,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen, isMobile }) => {
     const USER = JSON.parse(localStorage.getItem("user") || "{}");
 
     if (USER && USER.subjects) {
-      // console.log("Si hay datos en el localstorage", USER);
-
-      // Extraer todos los grupos (units) de cada materia (subject)
       const allGroups = USER.subjects.flatMap((subject: any) => subject.groups);
 
       setGroups(allGroups); // Guardar los grupos en el estado
-    } else {
-    }
+    } 
   }, []);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
