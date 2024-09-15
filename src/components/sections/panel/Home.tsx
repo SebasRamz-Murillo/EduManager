@@ -1,5 +1,8 @@
+import { Input, TextField } from "@mui/material";
 import BadgeNotification from "../layout/BadgeNotification";
-import GridSubjets from "../layout/GridSubjets";
+import GridSubjets from "../../list/GridSubjets";
+import MessagesChat from "../../list/MessagesChat";
+import ReviewButton from "../../buttons/ReviewButton";
 
 export default function Home() {
   return (
@@ -13,9 +16,13 @@ export default function Home() {
         <GridSubjets />
       </div>
       {/* Tercer div en la tercera columna */}
-      <div className="h-full w-full bg-slate-500 sm:hidden lg:block">s</div>
+      <div className="h-full w-full flex-col items-start justify-end bg-slate-500 sm:hidden lg:flex">
+        <MessagesChat />
+      </div>
       {/* Cuarto div ocupando las dos columnas */}
-      <div className="col-span-2 h-full w-full bg-slate-500">s</div>
+      <div className="col-span-2 h-full w-full bg-slate-500">
+        <ReviewButton />
+      </div>
     </section>
   );
 }

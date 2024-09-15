@@ -7,10 +7,8 @@ export default function EstudianteInfo() {
   const [studentData, setStudentData] = useState(null);
 
   useEffect(() => {
-    // Function to fetch student data
     const fetchStudentData = async () => {
       try {
-        // Replace with your actual API call
         const response = await fetch(`/api/student/${id}`);
         const data = await response.json();
         setStudentData(data);
@@ -64,14 +62,14 @@ export default function EstudianteInfo() {
           <h3 className="font-semibold mb-2">Tareas de unidad</h3>
           <div className="h-32 flex items-center justify-center">
             {/* Placeholder for task graph */}
-            Graph placeholder
+            Grafica 1, circular?
           </div>
         </div>
         <div className="border-2 border-dashed border-purple-200 rounded p-4">
           <h3 className="font-semibold mb-2">Asistencias en unidad</h3>
           <div className="h-32 flex items-center justify-center">
             {/* Placeholder for attendance graph */}
-            Graph placeholder
+            Grafica 2
           </div>
         </div>
       </div>
