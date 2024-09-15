@@ -26,7 +26,7 @@ export default function Sidebar() {
         <Building2 size={24} />
       </div>
       <nav className="flex-grow p-4 space-y-2">
-        <Link to="/dashboard" className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-800 transition-colors">
+        <Link to="/panel/home" className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-800 transition-colors">
           <LayoutDashboard size={20} />
           <span>Dashboard</span>
         </Link>
