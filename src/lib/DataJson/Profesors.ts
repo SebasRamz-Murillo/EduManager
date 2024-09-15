@@ -1,11 +1,11 @@
-const profesores = [
+const ProfesorsArray1 = [
   {
     id: "1",
     first_name: "Juan",
     middle_name: "Carlos",
     last_name: "García",
     email: "jgarcia@school.com",
-    password: "hashedPassword1",
+    password: "Aa_12345",
     telephone: "555-1234",
     role: "p", // Role de profesor
     disabled: false,
@@ -27,6 +27,9 @@ const profesores = [
     updated_at: null,
     deleted_at: null,
   },
+];
+
+const ProfesorsArray2 = [
   {
     id: "3",
     first_name: "Pedro",
@@ -55,6 +58,9 @@ const profesores = [
     updated_at: null,
     deleted_at: null,
   },
+];
+
+const ProfesorsArray3 = [
   {
     id: "5",
     first_name: "Luis",
@@ -71,4 +77,4 @@ const profesores = [
   },
 ];
 
-export default profesores;
+export { ProfesorsArray1, ProfesorsArray2, ProfesorsArray3 };

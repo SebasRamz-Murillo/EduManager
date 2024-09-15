@@ -1,12 +1,23 @@
+import { GroupArray1, GroupArray2 } from "./Group";
 type Subject = {
   id?: string;
   name: string;
   description: string;
   units: string[]; // Lista de unidades
+  groups?: Group[]; // Lista de grupos
   created_at: Date;
   updated_at?: Date | null;
   deleted_at?: Date | null;
 };
+interface Group {
+  students: any;
+  id: string | null;
+  number: string;
+  letter: string;
+  created_at: Date;
+  updated_at: Date | null;
+  deleted_at: Date | null;
+}
 
 // Primer arreglo de materias
 const subjectsArray1: Subject[] = [
@@ -16,6 +27,7 @@ const subjectsArray1: Subject[] = [
     description: "Estudio de los números, operaciones y ecuaciones.",
     units: ["Álgebra", "Geometría", "Trigonometría"],
     created_at: new Date(),
+    groups: GroupArray1,
   },
   {
     id: "2",
@@ -23,6 +35,7 @@ const subjectsArray1: Subject[] = [
     description: "Estudio de los eventos históricos más importantes del mundo.",
     units: ["Historia Antigua", "Edad Media", "Historia Moderna"],
     created_at: new Date(),
+    groups: GroupArray2,
   },
   {
     id: "3",
@@ -30,6 +43,7 @@ const subjectsArray1: Subject[] = [
     description: "Estudio de los seres vivos, su estructura y función.",
     units: ["Células", "Genética", "Ecología"],
     created_at: new Date(),
+    groups: GroupArray1,
   },
   {
     id: "4",
@@ -37,6 +51,7 @@ const subjectsArray1: Subject[] = [
     description: "Estudio de la materia y sus reacciones.",
     units: ["Elementos", "Compuestos", "Reacciones Químicas"],
     created_at: new Date(),
+    groups: GroupArray2,
   },
   {
     id: "5",
@@ -44,6 +59,7 @@ const subjectsArray1: Subject[] = [
     description: "Estudio de la lengua y las obras literarias.",
     units: ["Gramática", "Literatura Clásica", "Literatura Contemporánea"],
     created_at: new Date(),
+    groups: GroupArray1,
   },
 ];
 
@@ -55,6 +71,7 @@ const subjectsArray2: Subject[] = [
     description: "Estudio de las leyes fundamentales del universo.",
     units: ["Mecánica", "Electricidad", "Óptica"],
     created_at: new Date(),
+    groups: GroupArray1,
   },
   {
     id: "7",
@@ -62,6 +79,7 @@ const subjectsArray2: Subject[] = [
     description: "Estudio de la Tierra y sus características físicas.",
     units: ["Geografía Física", "Geografía Humana", "Mapas"],
     created_at: new Date(),
+    groups: GroupArray2,
   },
   {
     id: "8",
@@ -69,6 +87,7 @@ const subjectsArray2: Subject[] = [
     description: "Desarrollo físico y deportivo de los estudiantes.",
     units: ["Deportes", "Salud Física", "Nutrición"],
     created_at: new Date(),
+    groups: GroupArray1,
   },
   {
     id: "9",
@@ -76,6 +95,7 @@ const subjectsArray2: Subject[] = [
     description: "Exploración de diversas formas de expresión artística.",
     units: ["Pintura", "Escultura", "Historia del Arte"],
     created_at: new Date(),
+    groups: GroupArray2,
   },
   {
     id: "10",
@@ -83,6 +103,7 @@ const subjectsArray2: Subject[] = [
     description: "Estudio de la música, su teoría y práctica.",
     units: ["Teoría Musical", "Instrumentos", "Composición"],
     created_at: new Date(),
+    groups: GroupArray1,
   },
 ];
 
@@ -94,6 +115,7 @@ const subjectsArray3: Subject[] = [
     description: "Introducción a las herramientas tecnológicas y su uso.",
     units: ["Informática", "Robótica", "Programación"],
     created_at: new Date(),
+    groups: GroupArray2,
   },
   {
     id: "12",
@@ -101,6 +123,7 @@ const subjectsArray3: Subject[] = [
     description: "Estudio de los sistemas económicos y financieros.",
     units: ["Microeconomía", "Macroeconomía", "Economía Internacional"],
     created_at: new Date(),
+    groups: GroupArray2,
   },
   {
     id: "13",
@@ -108,6 +131,7 @@ const subjectsArray3: Subject[] = [
     description: "Exploración de las principales corrientes de pensamiento.",
     units: ["Ética", "Metafísica", "Lógica"],
     created_at: new Date(),
+    groups: GroupArray2,
   },
   {
     id: "14",
@@ -115,6 +139,7 @@ const subjectsArray3: Subject[] = [
     description: "Estudio del comportamiento humano y los procesos mentales.",
     units: ["Cognición", "Desarrollo Humano", "Psicología Social"],
     created_at: new Date(),
+    groups: GroupArray2,
   },
   {
     id: "15",
@@ -126,6 +151,7 @@ const subjectsArray3: Subject[] = [
       "Relaciones Internacionales",
     ],
     created_at: new Date(),
+    groups: GroupArray2,
   },
 ];
 

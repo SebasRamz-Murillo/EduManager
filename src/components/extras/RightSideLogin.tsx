@@ -6,6 +6,7 @@ import { emailValid, textRequired } from "../../lib/validators";
 import LabelErrorTerminal from "./LabelErrorTerminal";
 import AlertMui from "./AlertMui";
 import { useNavigate } from "react-router-dom";
+import { ProfesorsArray1 } from "../../lib/DataJson/Profesors";
 
 export default function RightSideLogin() {
   const [form, setForm] = useState({
@@ -78,7 +79,17 @@ export default function RightSideLogin() {
   };
 
   const handleLogin = async () => {
-    navigate("/panel/home");
+    if (
+      form.password === ProfesorsArray1[0].password &&
+      form.email === ProfesorsArray1[0].email
+    ) {
+      setTimeout(() => {
+        navigate("/panel/home");
+      }, 1000);
+      return;
+    } else {
+      navigate("/");
+    }
     // Aquí manejarías la lógica del login
   };
 
@@ -112,7 +123,7 @@ export default function RightSideLogin() {
             Iniciar Sesión
           </h2>
           <p>Nos encanta que estemos trabajando juntos 😁</p>
-          <form action="" className="w-full pt-[20px]">
+          <section className="w-full pt-[20px]">
             <div className="mt-6 h-[70px]">
               <TextField
                 error={!!formError.email}
@@ -158,7 +169,7 @@ export default function RightSideLogin() {
                 )}
               </button>
             </div>
-          </form>
+          </section>
         </div>
       </section>
       <AlertMui

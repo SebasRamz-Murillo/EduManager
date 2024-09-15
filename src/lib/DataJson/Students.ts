@@ -9,6 +9,7 @@ type Student = {
   created_at: Date;
   updated_at?: Date | null;
   deleted_at?: Date | null;
+  status?: number;
 };
 
 // Primer arreglo de estudiantes
@@ -22,6 +23,7 @@ const studentsArray1: Student[] = [
     email: "alice.smith@example.com",
     telephone: "123-456-7890",
     created_at: new Date(),
+    status: 8,
   },
   {
     id: "2",
@@ -32,6 +34,7 @@ const studentsArray1: Student[] = [
     email: "bob.johnson@example.com",
     telephone: "234-567-8901",
     created_at: new Date(),
+    status: 7,
   },
   {
     id: "3",
@@ -42,6 +45,7 @@ const studentsArray1: Student[] = [
     email: "carol.williams@example.com",
     telephone: "345-678-9012",
     created_at: new Date(),
+    status: 6,
   },
   {
     id: "4",
@@ -52,6 +56,7 @@ const studentsArray1: Student[] = [
     email: "david.brown@example.com",
     telephone: "456-789-0123",
     created_at: new Date(),
+    status: 5,
   },
   {
     id: "5",
@@ -62,6 +67,62 @@ const studentsArray1: Student[] = [
     email: "emily.davis@example.com",
     telephone: "567-890-1234",
     created_at: new Date(),
+    status: 4,
+  },
+  {
+    id: "1",
+    first_name: "Alice",
+    middle_name: "Marie",
+    last_name: "Smith",
+    age: "15",
+    email: "alice.smith@example.com",
+    telephone: "123-456-7890",
+    created_at: new Date(),
+    status: 8,
+  },
+  {
+    id: "2",
+    first_name: "Bob",
+    middle_name: "Alexander",
+    last_name: "Johnson",
+    age: "16",
+    email: "bob.johnson@example.com",
+    telephone: "234-567-8901",
+    created_at: new Date(),
+    status: 7,
+  },
+  {
+    id: "3",
+    first_name: "Carol",
+    middle_name: "Ann",
+    last_name: "Williams",
+    age: "17",
+    email: "carol.williams@example.com",
+    telephone: "345-678-9012",
+    created_at: new Date(),
+    status: 6,
+  },
+  {
+    id: "4",
+    first_name: "David",
+    middle_name: "James",
+    last_name: "Brown",
+    age: "14",
+    email: "david.brown@example.com",
+    telephone: "456-789-0123",
+    created_at: new Date(),
+    status: 5,
+  },
+  {
+    id: "5",
+    first_name: "Emily",
+    middle_name: "Grace",
+    last_name: "Davis",
+    age: "16",
+    email: "emily.davis@example.com",
+    telephone: "567-890-1234",
+    created_at: new Date(),
+    status: 4,
   },
 ];
 
@@ -76,6 +137,7 @@ const studentsArray2: Student[] = [
     email: "frank.miller@example.com",
     telephone: "678-901-2345",
     created_at: new Date(),
+    status: 3,
   },
   {
     id: "7",
@@ -86,6 +148,7 @@ const studentsArray2: Student[] = [
     email: "grace.wilson@example.com",
     telephone: "789-012-3456",
     created_at: new Date(),
+    status: 2,
   },
   {
     id: "8",
@@ -96,6 +159,7 @@ const studentsArray2: Student[] = [
     email: "henry.moore@example.com",
     telephone: "890-123-4567",
     created_at: new Date(),
+    status: 1,
   },
   {
     id: "9",
@@ -106,6 +170,7 @@ const studentsArray2: Student[] = [
     email: "ivy.taylor@example.com",
     telephone: "901-234-5678",
     created_at: new Date(),
+    status: 10,
   },
   {
     id: "10",
@@ -116,6 +181,7 @@ const studentsArray2: Student[] = [
     email: "jack.anderson@example.com",
     telephone: "012-345-6789",
     created_at: new Date(),
+    status: 9,
   },
 ];
 
@@ -130,6 +196,7 @@ const studentsArray3: Student[] = [
     email: "kelly.thomas@example.com",
     telephone: "111-222-3333",
     created_at: new Date(),
+    status: 10,
   },
   {
     id: "12",
@@ -140,6 +207,7 @@ const studentsArray3: Student[] = [
     email: "liam.jackson@example.com",
     telephone: "222-333-4444",
     created_at: new Date(),
+    status: 9,
   },
   {
     id: "13",
@@ -150,6 +218,7 @@ const studentsArray3: Student[] = [
     email: "mia.white@example.com",
     telephone: "333-444-5555",
     created_at: new Date(),
+    status: 6,
   },
   {
     id: "14",
@@ -160,6 +229,7 @@ const studentsArray3: Student[] = [
     email: "noah.harris@example.com",
     telephone: "444-555-6666",
     created_at: new Date(),
+    status: 4,
   },
   {
     id: "15",
@@ -170,6 +240,7 @@ const studentsArray3: Student[] = [
     email: "olivia.martin@example.com",
     telephone: "555-666-7777",
     created_at: new Date(),
+    status: 2,
   },
 ];
 
